@@ -23,7 +23,7 @@ const CartButton = () => {
       </Link>
       {myUser ? (
         <button type="button" className="auth-btn" onClick={logout}>
-        logout <FaUserMinus />
+        {myUser.name} <FaUserMinus />
       </button>
         
       ) : (
@@ -50,6 +50,11 @@ const Wrapper = styled.div`
 
     align-items: center;
   }
+
+  .cart-btn-wrapper {
+    display: none;
+  }
+  
   .cart-container {
     display: flex;
     align-items: center;

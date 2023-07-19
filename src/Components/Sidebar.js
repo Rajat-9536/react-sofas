@@ -12,7 +12,7 @@ const Sidebar = () => {
   return (
     <SidebarContainer>
       <aside
-        className={`${isSidebarOpen ? "sidebar show-sidebar" : "show-sidebar"}`}
+        className={`${isSidebarOpen ? "sidebar show-sidebar" : "sidebar"}`}
       >   
         <div className="sidebar-header">
           <img src="https://react-course-comfy-sloth-store.netlify.app/static/media/logo.221f6b13e6eaaad5828372464f73a1a4.svg" />
