@@ -31,3 +31,18 @@ exports.handler = async function (event, context) {
     body: "Create Payment Intent",
   };
 };
+
+
+
+
+
+
+// [build]
+//   command = "CI='' npm run build"
+//   publish = "/build"
+//   base ="/"
+
+// [[redirects]]
+//   from = "/*"
+//   to = "/index.html"
+//   status = 200
