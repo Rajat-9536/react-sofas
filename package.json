@@ -1,6 +1,7 @@
 {
   "name": "comfy",
   "version": "0.1.0",
+  "proxy": "http://localhost:5000",
   "private": true,
   "dependencies": {
     "@auth0/auth0-react": "^2.0.0",
@@ -14,10 +15,11 @@
     "dotenv": "^16.0.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-google-login": "^5.2.2",
     "react-icons": "^4.6.0",
     "react-qrcode-logo": "^2.9.0",
     "react-router-dom": "^6.14.1",
-    "react-scripts": "5.0.1",
+    "react-scripts": "^5.0.1",
     "stripe": "^10.16.0",
     "styled-components": "^5.3.6",
     "web-vitals": "^2.1.4"
@@ -46,8 +48,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "netlify-cli": "^12.1.0"
   }
 }

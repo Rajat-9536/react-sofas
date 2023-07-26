@@ -1,13 +1,25 @@
 import React, { useEffect, useState } from "react";
-import { UserData } from "./UserData";
+import { useApiContext } from "../context/api_context";
+import { usePopUpContext } from "../context/popup_context";
+import PopUp from "../Components/PopUp";
+import { Link } from "react-router-dom";
+import GoogleLoginButton from "../Components/GoogleLogin";
 
 const FinalLogin = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const { apiRequest } = useApiContext();
+  const [formData, setformData] = useState({
+    email: "",
+    password: "",
+  });
+  // const [email, setEmail] = useState("");
+  // const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
   const [message, setMessage] = useState("");
-  const [showPopup, setShowPopup] = useState(false);
+  const { showPopUpMessage } = usePopUpContext();
+  // const [isVisible, setIsVisible] = useState(true);
+  // const [showPopup, setShowPopup] = useState(false);
   //   const [errorMessage, setErrorMessage] = useState('');
-  const [backendData, setbackData] = useState([]);
+  //const [backendData, setbackData] = useState([]);
 
   //   useEffect(() => {
   //     fetch("/login")
@@ -17,44 +29,38 @@ const FinalLogin = () => {
   //       });
   //   }, []);
 
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setformData((prevFormData) => ({ ...prevFormData, [name]: value }));
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     // Send login request to Node.js backend
     try {
-      const response = await fetch("/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
-      });
-
-      const data = await response.json();
-      console.log(data); // Handle the response data
-
-      if (data.success) {
-        setMessage(data.message);
-        console.log(data.message);
-        setShowPopup(true);
-        setTimeout(() =>{
-          setShowPopup(false);
-        })
-
+      const response = await apiRequest("POST", "login", formData);
+      console.log(response); // Handle the response data
+      if (response.success) {
+        setMessage(response.message);
+        console.log(response.name);
+        setName(response.name);
+        // console.log(response.message);
+        showPopUpMessage(response.message);
       } else {
-        setMessage(data.message);
-        console.log(data.message);
+        setMessage(response.message);
+        setName("");
+        // console.log(response.message);
+        showPopUpMessage(response.message);
       }
     } catch (error) {
       console.log(error);
     }
   };
 
-  console.log(backendData);
-
   return (
-    <div className=" form-background p-t-70 p-b-70">
-      <div className="login-form">
+    <div className="grid-x  form-background p-t-70 p-b-70">
+      <div className="cell small-12 medium-8 large-4 login-form">
         <form onSubmit={handleSubmit}>
           <h1>Login</h1>
           <div className="content">
@@ -64,8 +70,8 @@ const FinalLogin = () => {
                 type="email"
                 placeholder="email"
                 autoComplete="nope"
-                value={email}
-                onChange={(event) => setEmail(event.target.value)}
+                value={formData.email}
+                onChange={handleChange}
                 required
               />
             </div>
@@ -75,27 +81,29 @@ const FinalLogin = () => {
                 type="password"
                 placeholder="password"
                 autoComplete="nope"
-                value={password}
-                onChange={(event) => setPassword(event.target.value)}
+                value={formData.password}
+                onChange={handleChange}
                 required
               />
             </div>
           </div>
           <div className="action">
             <button type="submit">Login</button>
-            <button>Register</button>
           </div>
+          <div className="text-center m-t-b-20">
+            <GoogleLoginButton/>
+          </div>
+          <div className="text-center m-t-b-10">
+              <span className="p-t-b-10">
+                Create an Account <Link to="/signup" className="">Sign Up</Link>
+              </span>
+            </div>
         </form>
-        {
-          <div className="popup">
-          <p>{message}</p>
-        </div>
-        
-          
-        }
+        {<PopUp name={name} />}
       </div>
     </div>
   );
 };
+
 
 export default FinalLogin;

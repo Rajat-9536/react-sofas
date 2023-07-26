@@ -43,10 +43,10 @@ const Banner = () => {
                       const { id, BannerTitle,BannerContent } = a;
                       return (
                         <div key={id}>
-                          <h1 className="fg-light">{BannerTitle}</h1>
+                          <h1 className="fg-light">BannerTitle</h1>
 
                           <p className="fg-light font-size-large medium-m-b-30">
-                            {BannerContent}
+                            BannerContent
                           </p>
                         </div>
                       );

@@ -1,13 +1,15 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
-// import './Local.css';
+import "./container.css";
 import App from "./App";
 import { ProductsProvider } from "./context/products_context";
 import { FilterProvider } from "./context/filter_context";
 import { CartProvider } from "./context/cart_context";
 import { Auth0Provider } from "@auth0/auth0-react";
-import {UserProvider} from "./context/user_context"
+import { UserProvider } from "./context/user_context";
+import { ApiProvider } from "./context/api_context";
+import { PopUpProvider } from "./context/popup_context";
 
 // dev-x3moz4hrm53u8cx8.us.auth0.com
 // meS4vspNKpnS7kbY5QpxtbIwayVGEfT3
@@ -22,15 +24,19 @@ root.render(
       cacheLocation: "localstorage",
     }}
   >
-    <UserProvider>
-      <ProductsProvider>
-        <FilterProvider>
-          <CartProvider>
-            <App />
-          </CartProvider>
-        </FilterProvider>
-      </ProductsProvider>
-    </UserProvider>
+    <PopUpProvider>
+      <ApiProvider>
+        <UserProvider>
+          <ProductsProvider>
+            <FilterProvider>
+              <CartProvider>
+                <App />
+              </CartProvider>
+            </FilterProvider>
+          </ProductsProvider>
+        </UserProvider>
+      </ApiProvider>
+    </PopUpProvider>
   </Auth0Provider>
 );
 

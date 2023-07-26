@@ -1,11 +1,11 @@
 import React from "react";
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 // import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "./Pages/Navbar";
 import Home from "./Pages/Home";
 import About from "./Pages/About";
-import Contact from "./Pages/Contact";
+import ContactPage from "./Pages/ContactPage";
 import FinalLogin from "./Pages/FinalLogin";
 import SignUp from "./Pages/SignUp";
 import Footer from "./Components/Footer";
@@ -17,6 +17,7 @@ import ProductsPage from "./Pages/ProductsPage";
 import CartPage from "./Pages/CartPage";
 import PrivateRoute from "./Pages/PrivateRoute";
 import AuthWrapper from "./Pages/AuthWrapper";
+import ManageAddress from "./Components/ManageAddress";
 
 const App = () => {
   return (
@@ -27,7 +28,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="about" element={<About />} />
-          <Route path="contact" element={<Contact />} />
+          <Route path="contact" element={<ContactPage />} />
           <Route path="products" element={<ProductsPage />} />
           <Route path="checkout" element={<Checkout />} />
 
@@ -40,6 +41,7 @@ const App = () => {
           <Route path="signup" element={<SignUp />} />
           <Route path="cart" element={<CartPage />} />
           <Route path="products/:id" element={<SingleProductPage />} />
+          <Route path="api/address" element={<ManageAddress />} />
           <Route path="*" element={<ErrorPage />} />
         </Routes>
         <Footer />

@@ -4,6 +4,7 @@ import CalltoAction from "./CalltoAction";
 import { useCartContext } from "../context/cart_context";
 import StripeCheckout from "../Components/StripeCheckout";
 import { Link } from "react-router-dom";
+import ManageAddress from "../Components/ManageAddress";
 
 const Checkout = ({ title }) => {
   const { cart } = useCartContext();
@@ -13,10 +14,12 @@ const Checkout = ({ title }) => {
       <Wrapper className="page-100">
         {cart.length < 1 ? (
           <div className="empty">
+            <div>
             <h2>your cart is empty</h2>
             <Link to="/products" className="btn">
               fill it
             </Link>
+            </div>
           </div>
         ) : (
           <StripeCheckout />
